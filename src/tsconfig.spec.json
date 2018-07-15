@@ -3,6 +3,12 @@
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ]
+    },
     "types": [
       "jasmine",
       "node"
