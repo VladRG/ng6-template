@@ -1,5 +1,5 @@
-import { AppState } from './app.state';
+import { AppRootState } from './app.state';
 
-export const getMessages = (state: AppState) => state.messages;
+export const getMessages = (state: AppRootState) => state.messages;
 
-export const getUser = (state: AppState) => state.user;
+export const getUser = (state: AppRootState) => state.user;

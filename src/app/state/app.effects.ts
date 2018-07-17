@@ -1,15 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { AuthService } from '@app/core/services';
+import { AuthService } from '@app/auth';
 import { Observable, of } from 'rxjs';
-import { AppActionTypes, Login, ShowFlashMessage, ClearFlashMessage } from '@app/state/app.actions';
+import {
+  AppActionTypes, Login, ShowFlashMessage,
+  ClearFlashMessage, LoginSuccess, InitializeComplete
+} from '@app/state/app.actions';
 import { mergeMap, map, delay, tap } from 'rxjs/operators';
 import { Credentials, FlashMessage, FlashMessageType } from '@app/models';
 
 @Injectable()
 export class AppEffects {
   constructor(private actions$: Actions, private service: AuthService) { }
+
+  @Effect()
+  initialize$: Observable<Action> = this.actions$.pipe(
+    ofType(AppActionTypes.Initialize),
+    mergeMap(() => {
+      const user = this.service.getUser();
+      if (user) {
+        return [
+          new LoginSuccess(user),
+          new InitializeComplete()
+        ];
+      }
+      return [new InitializeComplete()];
+    })
+  );
 
   @Effect()
   login$: Observable<Action> = this.actions$.pipe(

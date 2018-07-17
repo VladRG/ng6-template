@@ -5,11 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [{
-  path: 'login',
+  path: 'auth/login',
   component: LoginComponent
 },
 {
-  path: 'reset-password',
+  path: 'auth/reset-password',
   component: ResetPasswordComponent
 }];
 

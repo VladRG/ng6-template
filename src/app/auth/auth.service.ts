@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as jwtDecode from 'jwt-decode';
-import { Credentials } from '@app/models';
+import { Credentials, User } from '@app/models';
 import { Observable } from 'rxjs';
 import { JWT_LOCAL_STORAGE_KEY } from '@app/utils';
 
@@ -41,8 +41,6 @@ export class AuthService {
     return true;
   }
 
-
-
   setToken(token: string) {
     if (token) {
       localStorage.setItem(JWT_LOCAL_STORAGE_KEY, token);
@@ -55,6 +53,18 @@ export class AuthService {
 
   clearToken(): void {
     localStorage.removeItem(JWT_LOCAL_STORAGE_KEY);
+  }
+
+  getUser(): User {
+    if (!localStorage.getItem(JWT_LOCAL_STORAGE_KEY)) {
+      return null;
+    }
+    const { firstName, lastName, sub } = jwtDecode(localStorage.getItem(JWT_LOCAL_STORAGE_KEY));
+    return {
+      userName: sub,
+      firstName,
+      lastName
+    };
   }
 
   private getTokenExpirationDate(token: string): Date {

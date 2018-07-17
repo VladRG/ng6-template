@@ -1,12 +1,12 @@
 import { AppActions, AppActionTypes } from './app.actions';
-import { AppState } from './app.state';
+import { AppRootState } from './app.state';
 
-const initialState: AppState = {
+const initialState: AppRootState = {
   messages: [],
   user: null
 };
 
-export function reducer(state = initialState, action: AppActions): AppState {
+export function reducer(state = initialState, action: AppActions): AppRootState {
   switch (action.type) {
     case AppActionTypes.LoginSuccess:
       return {

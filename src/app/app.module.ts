@@ -10,6 +10,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment.prod';
 import { JwtModule } from '@auth0/angular-jwt';
 import { tokenLocalStorageGetter } from '@app/utils';
+import { AppAuthModule } from '@app/auth/auth.module';
+import { AppRoutingModule } from '@app/app.router';
+import { AppLayoutModule } from '@app/layout';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,11 @@ import { tokenLocalStorageGetter } from '@app/utils';
   imports: [
     BrowserModule,
     AppCoreModule,
-    StoreModule.forRoot(reducer),
+    AppAuthModule,
+    AppLayoutModule,
+    StoreModule.forRoot({
+      applicationState: reducer
+    }),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       name: 'Angular 6 Template',
@@ -30,6 +37,7 @@ import { tokenLocalStorageGetter } from '@app/utils';
         tokenGetter: tokenLocalStorageGetter
       }
     }),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
