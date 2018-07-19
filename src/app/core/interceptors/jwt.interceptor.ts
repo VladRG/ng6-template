@@ -14,15 +14,13 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {
-
-  }
+  constructor(private service: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.getToken()) {
+    if (this.service.getToken()) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.authService.getToken()}`
+          Authorization: `Bearer ${this.service.getToken()}`
         }
       });
     }
@@ -34,12 +32,12 @@ export class AuthInterceptor implements HttpInterceptor {
             return;
           }
           const token = authHeader.replace('Bearer ', '');
-          this.authService.setToken(token);
+          this.service.setToken(token);
         }
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            this.authService.checkLogin();
+            this.service.checkLogin();
           }
         }
       }));

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FlashMessageComponent } from './components';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
   MatSidenavModule, MatToolbarModule, MatButtonModule
@@ -11,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [FlashMessageComponent],
+  declarations: [],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,

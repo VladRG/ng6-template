@@ -5,14 +5,19 @@ import { AuthService } from '@app/auth';
 import { Observable, of } from 'rxjs';
 import {
   AppActionTypes, Login, ShowFlashMessage,
-  ClearFlashMessage, LoginSuccess, InitializeComplete
+  ClearFlashMessage, LoginSuccess, InitializeComplete, LoginFail
 } from '@app/state/app.actions';
-import { mergeMap, map, delay, tap } from 'rxjs/operators';
+import { mergeMap, map, delay, tap, catchError } from 'rxjs/operators';
 import { Credentials, FlashMessage, FlashMessageType } from '@app/models';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AppEffects {
-  constructor(private actions$: Actions, private service: AuthService) { }
+  constructor(
+    private actions$: Actions,
+    private service: AuthService,
+    private router: Router
+  ) { }
 
   @Effect()
   initialize$: Observable<Action> = this.actions$.pipe(
@@ -36,8 +41,13 @@ export class AppEffects {
     mergeMap((credentials: Credentials) => this.service.login(credentials).pipe(
       mergeMap((token: string) => {
         this.service.setToken(token);
-        return of(new ShowFlashMessage(loginSuccessFlashMessage));
-      })
+        this.router.navigateByUrl('');
+        return [
+          new LoginSuccess(this.service.getUser()),
+          new ShowFlashMessage(loginSuccessFlashMessage)
+        ];
+      }),
+      catchError(error => of(new LoginFail(error)))
     ))
   );
 

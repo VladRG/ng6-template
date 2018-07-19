@@ -23,6 +23,11 @@ export function reducer(state = initialState, action: AppActions): AppRootState 
         ...state,
         messages: state.messages.filter(message => message !== action.payload)
       };
+    case AppActionTypes.Logout:
+      return {
+        ...state,
+        user: null
+      };
     default:
       return state;
   }

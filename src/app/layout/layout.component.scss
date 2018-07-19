@@ -1,25 +1,26 @@
 :host {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .sidebar-container {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .main-content {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .sidebar-content {
-	width: 260px;
-	background-color: rgba(0, 0, 0, 0.6);
+  width: 260px;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .content-container {
-	flex-grow: 1;
+  flex-grow: 1;
+  padding-top: 16px;
 }

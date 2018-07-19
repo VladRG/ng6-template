@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as jwtDecode from 'jwt-decode';
 import { Credentials, User } from '@app/models';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { JWT_LOCAL_STORAGE_KEY } from '@app/utils';
 
 @Injectable()
@@ -12,7 +12,11 @@ export class AuthService {
   private baseUrl = 'auth';
 
   login(credentials: Credentials): Observable<string> {
-    return this.http.post<string>(`${this.baseUrl}/login`, credentials);
+    const tokenFirst = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+    const tokenSecond = 'eyJzdWIiOiJkZXZlbG9wZXIiLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9';
+    const tokenLast = 'Rawd5yiNyTCmjwuyyfvNWNHIfo8LBwhJ7loWiGpHPGQ';
+    return of(`${tokenFirst}.${tokenSecond}.${tokenLast}`);
+    // return this.http.post<string>(`${this.baseUrl}/login`, credentials);
   }
 
   logout(): void {

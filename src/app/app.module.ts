@@ -13,14 +13,18 @@ import { tokenLocalStorageGetter } from '@app/utils';
 import { AppAuthModule } from '@app/auth/auth.module';
 import { AppRoutingModule } from '@app/app.router';
 import { AppLayoutModule } from '@app/layout';
+import { HomeComponent } from '@app/home/home.component';
+import { AppSharedModule } from '@app/shared';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppCoreModule,
+    AppSharedModule,
     AppAuthModule,
     AppLayoutModule,
     StoreModule.forRoot({

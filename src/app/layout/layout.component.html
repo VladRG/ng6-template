@@ -1,9 +1,10 @@
+<app-flash-message></app-flash-message>
 <mat-sidenav-container class="sidebar-container">
-	<mat-sidenav #sidenav mode='over' class="sidebar-content">Sidenav Content</mat-sidenav>
-	<mat-sidenav-content class="main-content">
-		<app-header (openSidebar)='sidenav.open()'></app-header>
-		<div class="content-container">
-			<router-outlet></router-outlet>
-		</div>
-	</mat-sidenav-content>
+  <mat-sidenav #sidenav mode='over' class="sidebar-content">Sidenav Content</mat-sidenav>
+  <mat-sidenav-content class="main-content">
+    <app-header [user]='user$ | async' (openSidebar)='sidenav.open()' (logout)='logout()'></app-header>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
