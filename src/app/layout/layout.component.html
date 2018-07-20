@@ -1,6 +1,8 @@
 <app-flash-message></app-flash-message>
 <mat-sidenav-container class="sidebar-container">
-  <mat-sidenav #sidenav mode='over' class="sidebar-content">Sidenav Content</mat-sidenav>
+  <mat-sidenav #sidenav mode='over' class="sidebar-content" (click)='sidenav.close()'>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
   <mat-sidenav-content class="main-content">
     <app-header [user]='user$ | async' (openSidebar)='sidenav.open()' (logout)='logout()'></app-header>
     <div class="content-container">

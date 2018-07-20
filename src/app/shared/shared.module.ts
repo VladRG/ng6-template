@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   MatCardModule, MatFormFieldModule, MatInputModule,
-  MatSidenavModule, MatToolbarModule, MatButtonModule
+  MatSidenavModule, MatToolbarModule, MatButtonModule, MatListModule, MatIconModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,8 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatListModule,
+    MatIconModule,
     RouterModule
   ],
   exports: [
@@ -37,6 +39,8 @@ import { RouterModule } from '@angular/router';
     MatSidenavModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatListModule,
+    MatIconModule,
     RouterModule
   ]
 })
